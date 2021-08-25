@@ -1,10 +1,10 @@
-defmodule ExJsonSchema.ValidatorTest do
+defmodule ExComponentSchema.ValidatorTest do
   use ExUnit.Case, async: true
 
-  import ExJsonSchema.Validator
+  import ExComponentSchema.Validator
 
-  alias ExJsonSchema.Validator.Error
-  alias ExJsonSchema.Schema
+  alias ExComponentSchema.Validator.Error
+  alias ExComponentSchema.Schema
 
   @schema_with_ref Schema.resolve(%{
                      "properties" => %{

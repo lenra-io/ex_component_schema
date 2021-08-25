@@ -1,13 +1,10 @@
 defmodule ExJsonSchema.Mixfile do
   use Mix.Project
 
-  @source_url "https://github.com/jonasschmidt/ex_json_schema"
-  @version "0.8.1"
-
   def project do
     [
-      app: :ex_json_schema,
-      version: @version,
+      app: :ex_component_schema,
+      version: "0.0.1-dev.0",
       elixir: "~> 1.6",
       description: """
         A JSON Schema validator with full support for the draft 4 specification
@@ -37,7 +34,6 @@ defmodule ExJsonSchema.Mixfile do
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
       {:excoveralls, "~> 0.10", only: :test},
       {:httpoison, "~> 0.8", only: :test},
-      {:mix_test_watch, "~> 0.2.6", only: [:dev, :test]},
       {:poison, "~> 1.5", only: :test}
     ]
   end
@@ -45,9 +41,7 @@ defmodule ExJsonSchema.Mixfile do
   defp docs do
     [
       extras: ["README.md"],
-      main: "readme",
-      source_url: @source_url,
-      source_ref: "v#{@version}"
+      main: "readme"
     ]
   end
 
@@ -55,8 +49,7 @@ defmodule ExJsonSchema.Mixfile do
     [
       files: ~w(lib mix.exs README.md LICENSE),
       maintainers: ["Jonas Schmidt"],
-      licenses: ["MIT"],
-      links: %{"GitHub" => @source_url}
+      licenses: ["MIT"]
     ]
   end
 
