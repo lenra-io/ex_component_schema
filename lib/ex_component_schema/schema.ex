@@ -40,7 +40,7 @@ defmodule ExComponentSchema.Schema do
   @draft4_schema_url "http://json-schema.org/draft-04/schema"
   @draft6_schema_url "http://json-schema.org/draft-06/schema"
   @draft7_schema_url "http://json-schema.org/draft-07/schema"
-  @draft_lenra_schema_url "draft-lenra.json"
+  @draft_lenra_schema_url "http://json-schema.org/draft-lenra/schema"
 
   @spec decode_json(String.t()) :: {:ok, String.t()} | {:error, String.t()}
   def decode_json(json) do
