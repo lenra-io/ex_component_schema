@@ -199,7 +199,8 @@
                 "number",
                 "object",
                 "string",
-                "component"
+                "component",
+                "listeners"
             ]
         },
         "schemaArray": {
