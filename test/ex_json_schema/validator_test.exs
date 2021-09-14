@@ -485,7 +485,7 @@ defmodule ExComponentSchema.ValidatorTest do
   end
 
   test "multiple of validator division by 0" do
-    assert ExJsonSchema.Validator.MultipleOf.validate(nil, nil, {"multipleOf", 0}, 5, nil) ==
+    assert ExComponentSchema.Validator.MultipleOf.validate(nil, nil, {"multipleOf", 0}, 5, nil) ==
              [%Error{error: %Error.MultipleOf{expected: 0}}]
   end
 
