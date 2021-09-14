@@ -54,7 +54,10 @@ defmodule ExComponentSchema.Schema.DraftLenra do
     "description" => "Core schema meta-schema",
     "id" => "draft-lenra.json",
     "properties" => %{
-      "$schema" => %{"pattern" => "^draft-lenra.json$", "type" => "string"},
+      "$schema" => %{
+        "pattern" => "^http://json-schema.org/draft-lenra/schema#$",
+        "type" => "string"
+      },
       "additionalItems" => %{
         "anyOf" => [%{"type" => "boolean"}, %{"$ref" => "#"}],
         "default" => %{}

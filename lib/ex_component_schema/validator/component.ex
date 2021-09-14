@@ -9,7 +9,6 @@ defmodule ExComponentSchema.Validator.Component do
 
   @impl ExComponentSchema.Validator
   def validate(_root, %{"type" => "component"}, {"comp", comp}, %{"comp" => comp}, _path) do
-    IO.puts("VALID COMP property #{comp}")
     []
   end
 
