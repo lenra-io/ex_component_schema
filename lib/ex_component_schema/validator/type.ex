@@ -50,6 +50,7 @@ defmodule ExComponentSchema.Validator.Type do
 
   defp valid?(_, "component", %{"comp" => _}), do: true
   defp valid?(_, "component", _), do: false
+  defp valid?(_, "listener", data), do: is_map(data)
 
   defp valid?(version, type, data) when is_list(type) do
     Enum.any?(type, &valid?(version, &1, data))

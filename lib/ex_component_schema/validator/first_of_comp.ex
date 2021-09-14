@@ -12,16 +12,20 @@ defmodule ExComponentSchema.Validator.FirstOfComp do
   @behaviour ExComponentSchema.Validator
 
   @impl ExComponentSchema.Validator
-  def validate(root, _, {"firstOfComp", one_of_comp}, data, path) do
-    do_validate(root, one_of_comp, data, path)
+  def validate(root, _, {"firstOfComp", first_of_comp}, data, path) do
+    with [] <- do_validate(root, first_of_comp, data, path) do
+      callback = Application.fetch_env!(:ex_component_schema, :on_comp_succeed)
+      callback.(data)
+      []
+    end
   end
 
   def validate(_, _, _, _, _) do
     []
   end
 
-  defp do_validate(root, one_of_comp, data, path) do
-    one_of_comp
+  defp do_validate(root, first_of_comp, data, path) do
+    first_of_comp
     |> Enum.reduce_while([], fn
       schema, _ ->
         case Validator.validation_errors(root, schema, data, path) do
