@@ -1,0 +1,252 @@
+{
+    "type": "object",
+    "properties": {
+        "firstOfComp": {
+            "$ref": "#/definitions/schemaArray"
+        },
+        "enum": {
+            "uniqueItems": true,
+            "type": "array",
+            "minItems": 1
+        },
+        "maximum": {
+            "type": "number"
+        },
+        "minLength": {
+            "$ref": "#/definitions/positiveIntegerDefault0"
+        },
+        "properties": {
+            "type": "object",
+            "default": {},
+            "additionalProperties": {
+                "$ref": "#"
+            }
+        },
+        "minProperties": {
+            "$ref": "#/definitions/positiveIntegerDefault0"
+        },
+        "description": {
+            "type": "string"
+        },
+        "maxProperties": {
+            "$ref": "#/definitions/positiveInteger"
+        },
+        "maxItems": {
+            "$ref": "#/definitions/positiveInteger"
+        },
+        "exclusiveMinimum": {
+            "type": "boolean",
+            "default": false
+        },
+        "pattern": {
+            "type": "string",
+            "format": "regex"
+        },
+        "minimum": {
+            "type": "number"
+        },
+        "multipleOf": {
+            "type": "number",
+            "minimum": 0,
+            "exclusiveMinimum": true
+        },
+        "default": {},
+        "not": {
+            "$ref": "#"
+        },
+        "required": {
+            "$ref": "#/definitions/stringArray"
+        },
+        "additionalProperties": {
+            "default": {},
+            "anyOf": [
+                {
+                    "type": "boolean"
+                },
+                {
+                    "$ref": "#"
+                }
+            ]
+        },
+        "minItems": {
+            "$ref": "#/definitions/positiveIntegerDefault0"
+        },
+        "allOf": {
+            "$ref": "#/definitions/schemaArray"
+        },
+        "additionalItems": {
+            "default": {},
+            "anyOf": [
+                {
+                    "type": "boolean"
+                },
+                {
+                    "$ref": "#"
+                }
+            ]
+        },
+        "exclusiveMaximum": {
+            "type": "boolean",
+            "default": false
+        },
+        "uniqueItems": {
+            "type": "boolean",
+            "default": false
+        },
+        "$schema": {
+            "type": "string",
+            "pattern": "^https?:\/\/.*\/draft-lenra.json$"
+        },
+        "maxLength": {
+            "$ref": "#/definitions/positiveInteger"
+        },
+        "patternProperties": {
+            "type": "object",
+            "default": {},
+            "additionalProperties": {
+                "$ref": "#"
+            }
+        },
+        "type": {
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/simpleTypes"
+                },
+                {
+                    "uniqueItems": true,
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                        "$ref": "#/definitions/simpleTypes"
+                    }
+                }
+            ]
+        },
+        "anyOf": {
+            "$ref": "#/definitions/schemaArray"
+        },
+        "oneOf": {
+            "$ref": "#/definitions/schemaArray"
+        },
+        "definitions": {
+            "type": "object",
+            "default": {},
+            "additionalProperties": {
+                "$ref": "#"
+            }
+        },
+        "items": {
+            "default": {},
+            "anyOf": [
+                {
+                    "$ref": "#"
+                },
+                {
+                    "$ref": "#/definitions/schemaArray"
+                }
+            ]
+        },
+        "dependencies": {
+            "type": "object",
+            "additionalProperties": {
+                "anyOf": [
+                    {
+                        "$ref": "#"
+                    },
+                    {
+                        "$ref": "#/definitions/stringArray"
+                    }
+                ]
+            }
+        },
+        "id": {
+            "type": "string",
+            "format": "uri"
+        },
+        "title": {
+            "type": "string"
+        },
+        "comp": {
+            "type": "string",
+            "format": "regex"
+        }
+    },
+    "id": "http://localhost:8080/draft-lenra.json",
+    "description": "Core schema meta-schema",
+    "dependencies": {
+        "exclusiveMinimum": [
+            "minimum"
+        ],
+        "exclusiveMaximum": [
+            "maximum"
+        ]
+    },
+    "definitions": {
+        "stringArray": {
+            "uniqueItems": true,
+            "type": "array",
+            "minItems": 1,
+            "items": {
+                "type": "string"
+            }
+        },
+        "simpleTypes": {
+            "enum": [
+                "array",
+                "boolean",
+                "integer",
+                "null",
+                "number",
+                "object",
+                "string",
+                "component"
+            ]
+        },
+        "schemaArray": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+                "$ref": "#"
+            }
+        },
+        "positiveIntegerDefault0": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/positiveInteger"
+                },
+                {
+                    "default": 0
+                }
+            ]
+        },
+        "positiveInteger": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "componentArray": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+                "$ref": "#/definitions/component"
+            }
+        },
+        "component": {
+            "type": "object",
+            "required": [
+                "type",
+                "comp"
+            ],
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "pattern": "^component$"
+                },
+                "comp": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "default": {},
+    "$schema": "http://json-schema.org/draft-04/schema#"
+}
