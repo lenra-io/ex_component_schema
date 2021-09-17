@@ -166,6 +166,15 @@
         "comp": {
             "type": "string",
             "format": "regex"
+        },
+        "listeners": {
+            "$ref": "#/definitions/listeners"
+        },
+        "children": {
+            "$ref": "#/definitions/children"
+        },
+        "child": {
+            "$ref": "#/definitions/component"
         }
     },
     "id": "http://localhost:8080/draft-lenra.json",
@@ -246,6 +255,10 @@
         },
         "listener": {
             "type": "object",
+            "required": [
+                "props",
+                "action"
+            ],
             "properties": {
                 "props": {
                     "type": "object"
@@ -268,9 +281,6 @@
             "items": {
                 "$ref": "#/definitions/component"
             }
-        },
-        "child": {
-            "$ref": "#/definitions/component"
         }
     },
     "default": {},
