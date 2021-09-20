@@ -158,7 +158,6 @@ defmodule ExComponentSchema.Validator do
   defp validator_for("required"), do: ExComponentSchema.Validator.Required
   defp validator_for("type"), do: ExComponentSchema.Validator.Type
   defp validator_for("uniqueItems"), do: ExComponentSchema.Validator.UniqueItems
-  defp validator_for("comp"), do: ExComponentSchema.Validator.Component
 
   defp validator_for(_) do
     nil

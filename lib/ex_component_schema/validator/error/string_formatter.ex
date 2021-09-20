@@ -222,8 +222,8 @@ defmodule ExComponentSchema.Validator.Error.StringFormatter do
       "comp property not found."
     end
 
-    def to_string(%Error.Component{actual: actual}) do
-      "The comp property value #{actual} does not match any component."
+    def to_string(%Error.Component{actual: actual, expected: expected}) do
+      "The comp property value #{actual} does not match the component #{expected}"
     end
   end
 end
