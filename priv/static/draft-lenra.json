@@ -267,8 +267,9 @@
                     "type": "string"
                 },
                 "additionalProperties": {
-                    "type": "boolean",
-                    "pattern": "^false$"
+                    "enum": [
+                        false
+                    ]
                 }
             },
             "required": [
@@ -295,7 +296,9 @@
                                     "pattern": "^string$"
                                 }
                             },
-                            "required": ["type"]
+                            "required": [
+                                "type"
+                            ]
                         },
                         "props": {
                             "type": "object",
@@ -305,7 +308,9 @@
                                     "pattern": "^object$"
                                 }
                             },
-                            "required": ["type"]
+                            "required": [
+                                "type"
+                            ]
                         }
                     },
                     "additionalProperties": true,
