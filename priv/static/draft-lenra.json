@@ -263,8 +263,23 @@
                     "type": "string",
                     "pattern": "^component$"
                 },
-                "comp": {
-                    "type": "string"
+                "properties": {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "object",
+                            "properties": {
+                                "enum": {
+                                    "type": "array",
+                                    "items": [
+                                        {
+                                            "type": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
                 },
                 "additionalProperties": {
                     "enum": [
