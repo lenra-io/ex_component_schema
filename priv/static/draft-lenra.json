@@ -287,18 +287,6 @@
                         },
                         "props": {
                             "type": "object"
-                        },
-                        "required": {
-                            "type": "array",
-                            "items": [
-                                {
-                                    "type": "string",
-                                    "pattern": "^action$"
-                                }
-                            ],
-                            "additionalItems": {
-                                "$ref": "#/definitions/stringArray"
-                            }
                         }
                     },
                     "additionalProperties": true,
@@ -306,11 +294,24 @@
                         "action",
                         "props"
                     ]
+                },
+                "required": {
+                    "type": "array",
+                    "items": [
+                        {
+                            "type": "string",
+                            "pattern": "^action$"
+                        }
+                    ],
+                    "additionalItems": {
+                        "$ref": "#/definitions/stringArray"
+                    }
                 }
             },
             "required": [
                 "type",
-                "properties"
+                "properties",
+                "required"
             ]
         }
     },
