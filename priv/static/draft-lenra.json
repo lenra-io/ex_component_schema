@@ -265,11 +265,16 @@
                 },
                 "comp": {
                     "type": "string"
+                },
+                "additionalProperties": {
+                    "type": "boolean",
+                    "pattern": "^false$"
                 }
             },
             "required": [
                 "type",
-                "comp"
+                "comp",
+                "additionalProperties"
             ]
         },
         "listenerType": {
@@ -283,10 +288,24 @@
                     "type": "object",
                     "properties": {
                         "action": {
-                            "type": "string"
+                            "type": "object",
+                            "properties": {
+                                "type": {
+                                    "type": "string",
+                                    "pattern": "^string$"
+                                }
+                            },
+                            "required": ["type"]
                         },
                         "props": {
-                            "type": "object"
+                            "type": "object",
+                            "properties": {
+                                "type": {
+                                    "type": "string",
+                                    "pattern": "^object$"
+                                }
+                            },
+                            "required": ["type"]
                         }
                     },
                     "additionalProperties": true,
