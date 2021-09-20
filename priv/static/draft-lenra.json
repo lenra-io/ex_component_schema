@@ -277,9 +277,15 @@
                                         }
                                     ]
                                 }
-                            }
+                            },
+                            "required": [
+                                "enum"
+                            ]
                         }
-                    }
+                    },
+                    "required": [
+                        "type"
+                    ]
                 },
                 "additionalProperties": {
                     "enum": [
@@ -289,7 +295,7 @@
             },
             "required": [
                 "type",
-                "comp",
+                "properties",
                 "additionalProperties"
             ]
         },
