@@ -11,9 +11,16 @@
                 },
                 "onPressed": {
                     "$ref": "#/$defs/listener"
+                },
+                "children": {
+                    "type": "array",
+                    "items": {
+                        "type": "component"
+                    }
                 }
             },
             "required": [
+                "type",
                 "onPressed"
             ],
             "additionalProperties": false,
