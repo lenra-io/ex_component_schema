@@ -10,6 +10,15 @@
                     ]
                 },
                 "onPressed": {
+                    "$ref": "#/$defs/listener"
+                }
+            },
+            "required": [
+                "onPressed"
+            ],
+            "additionalProperties": false,
+            "$defs": {
+                "listener": {
                     "type": "listener",
                     "properties": {
                         "action": {
@@ -23,11 +32,7 @@
                         "action"
                     ]
                 }
-            },
-            "required": [
-                "onPressed"
-            ],
-            "additionalProperties": false
+            }
         },
         "tests": [
             {
