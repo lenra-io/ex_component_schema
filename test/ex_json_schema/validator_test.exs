@@ -3,8 +3,8 @@ defmodule ExComponentSchema.ValidatorTest do
 
   import ExComponentSchema.Validator
 
-  alias ExComponentSchema.Validator.Error
   alias ExComponentSchema.Schema
+  alias ExComponentSchema.Validator.Error
 
   @schema_with_ref Schema.resolve(%{
                      "properties" => %{

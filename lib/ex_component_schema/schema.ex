@@ -221,8 +221,6 @@ defmodule ExComponentSchema.Schema do
   defp resolve_property(root, {"$ref", ref}, scope) do
     scoped_ref =
       case URI.parse(ref) do
-        # TODO: this special case is only needed until there is proper support for URL references
-        # that point to a local schema (via scope changes)
         %URI{host: nil, path: nil} = uri ->
           to_string(uri)
 

@@ -1,4 +1,4 @@
-defmodule ExComponentSchema.JsonSchemaDraft4TestSuiteTest do
+defmodule ExComponentSchema.JsonSchemaDraft4LenraTestSuiteTest do
   use ExUnit.Case, async: true
 
   use ExComponentSchema.Test.Support.TestSuiteTemplate,

@@ -1,7 +1,7 @@
 defmodule ExComponentSchema.Validator do
-  alias ExComponentSchema.Validator.Error
   alias ExComponentSchema.Schema
   alias ExComponentSchema.Schema.Root
+  alias ExComponentSchema.Validator.Error
 
   @type errors :: [%Error{}] | list
   @type options :: [error_formatter: module() | false]
@@ -79,8 +79,8 @@ defmodule ExComponentSchema.Validator do
 
   def do_validation_errors(root = %Root{}, schema = %{}, data, path) do
     schema
-    |> Enum.flat_map(fn {propertyName, _} = property ->
-      case validator_for(propertyName) do
+    |> Enum.flat_map(fn {property_name, _} = property ->
+      case validator_for(property_name) do
         nil -> []
         validator -> validator.validate(root, schema, property, data, path)
       end

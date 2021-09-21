@@ -8,6 +8,8 @@ defmodule ExComponentSchema.Validator.Format do
   https://tools.ietf.org/html/draft-handrews-json-schema-validation-01#section-7
   """
 
+  # credo:disable-for-this-file Credo.Check.Readability.MaxLineLength
+
   alias ExComponentSchema.Schema.Root
   alias ExComponentSchema.Validator.Error
 

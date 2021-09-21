@@ -1,4 +1,6 @@
 defmodule ExComponentSchema.Validator.Error do
+  # credo:disable-for-this-file Credo.Check.Readability.ModuleDoc
+
   defstruct [:error, :path]
 
   defmodule AdditionalItems do
