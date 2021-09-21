@@ -291,12 +291,25 @@
                     "enum": [
                         false
                     ]
+                },
+                "required": {
+                    "type": "array",
+                    "items": [
+                        {
+                            "type": "string",
+                            "pattern": "^type$"
+                        }
+                    ],
+                    "additionalItems": {
+                        "$ref": "#/definitions/stringArray"
+                    }
                 }
             },
             "required": [
                 "type",
                 "properties",
-                "additionalProperties"
+                "additionalProperties",
+                "required"
             ]
         },
         "listenerType": {
