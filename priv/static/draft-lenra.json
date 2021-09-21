@@ -20,6 +20,9 @@
                 },
                 {
                     "$ref": "#/definitions/compType"
+                },
+                {
+                    "$ref": "#/definitions/requiredCompProps"
                 }
             ]
         },
@@ -30,6 +33,9 @@
                 },
                 {
                     "$ref": "#/definitions/listenerType"
+                },
+                {
+                    "$ref": "#/definitions/requiredListenerProps"
                 }
             ]
         }
@@ -260,9 +266,18 @@
             "type": "object",
             "properties": {
                 "type": {
-                    "type": "string",
-                    "pattern": "^component$"
-                },
+                    "enum": [
+                        "component"
+                    ]
+                }
+            },
+            "required": [
+                "type"
+            ]
+        },
+        "requiredCompProps": {
+            "type": "object",
+            "properties": {
                 "properties": {
                     "type": "object",
                     "properties": {
@@ -296,8 +311,9 @@
                     "type": "array",
                     "items": [
                         {
-                            "type": "string",
-                            "pattern": "^type$"
+                            "enum": [
+                                "type"
+                            ]
                         }
                     ],
                     "additionalItems": {
@@ -306,7 +322,6 @@
                 }
             },
             "required": [
-                "type",
                 "properties",
                 "additionalProperties",
                 "required"
@@ -316,9 +331,18 @@
             "type": "object",
             "properties": {
                 "type": {
-                    "type": "string",
-                    "pattern": "^listener$"
-                },
+                    "enum": [
+                        "listener"
+                    ]
+                }
+            },
+            "required": [
+                "type"
+            ]
+        },
+        "requiredListenerProps": {
+            "type": "object",
+            "properties": {
                 "properties": {
                     "type": "object",
                     "properties": {
@@ -326,8 +350,9 @@
                             "type": "object",
                             "properties": {
                                 "type": {
-                                    "type": "string",
-                                    "pattern": "^string$"
+                                    "enum": [
+                                        "string"
+                                    ]
                                 }
                             },
                             "required": [
@@ -338,8 +363,9 @@
                             "type": "object",
                             "properties": {
                                 "type": {
-                                    "type": "string",
-                                    "pattern": "^object$"
+                                    "enum": [
+                                        "object"
+                                    ]
                                 }
                             },
                             "required": [
@@ -357,8 +383,9 @@
                     "type": "array",
                     "items": [
                         {
-                            "type": "string",
-                            "pattern": "^action$"
+                            "enum": [
+                                "action"
+                            ]
                         }
                     ],
                     "additionalItems": {
@@ -367,7 +394,6 @@
                 }
             },
             "required": [
-                "type",
                 "properties",
                 "required"
             ]
