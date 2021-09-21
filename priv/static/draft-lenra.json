@@ -1,5 +1,5 @@
 {
-    "$id": "http://localhost:8080/draft-lenra.json",
+    "$id": "https://raw.githubusercontent.com/lenra-io/ex_component_schema/beta/priv/static/draft-lenra.json",
     "$schema": "http://json-schema.org/draft-04/schema#",
     "description": "Core schema meta-schema",
     "oneOf": [

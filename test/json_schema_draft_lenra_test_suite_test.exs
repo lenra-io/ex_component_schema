@@ -4,7 +4,7 @@ defmodule ExComponentSchema.JsonSchemaDraftLenraTestSuiteTest do
   use ExComponentSchema.Test.Support.TestSuiteTemplate,
     schema_tests_path: "test/API-component-Test-Suite/tests/",
     schema_url:
-      "https://raw.githubusercontent.com/lenra-io/ex_component_schema/poc_components/priv/static/draft-lenra.json",
+      "https://raw.githubusercontent.com/lenra-io/ex_component_schema/beta/priv/static/draft-lenra.json",
     ignored_tests: [
       "Location-independent identifier: match",
       "Location-independent identifier: mismatch",
