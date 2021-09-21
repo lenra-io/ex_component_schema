@@ -29,6 +29,13 @@
         {
             "allOf": [
                 {
+                    "$ref": "#/definitions/compTypeOnly"
+                }
+            ]
+        },
+        {
+            "allOf": [
+                {
                     "$ref": "#/definitions/d4"
                 },
                 {
@@ -274,6 +281,21 @@
             "required": [
                 "type"
             ]
+        },
+        "compTypeOnly": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "component"
+                    ]
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
         },
         "requiredCompProps": {
             "type": "object",
