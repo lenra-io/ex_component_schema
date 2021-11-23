@@ -207,8 +207,7 @@ defmodule ExComponentSchema.Validator.Error.StringFormatter do
     defp type_names(types) do
       types
       |> List.wrap()
-      |> Enum.map(&String.capitalize/1)
-      |> Enum.join(", ")
+      |> Enum.map_join(", ", &String.capitalize/1)
     end
   end
 
