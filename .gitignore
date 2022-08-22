@@ -26,7 +26,6 @@ ex_json_schema-*.tar
 /tmp
 
 # Misc
-mix.lock
 *.plt
 
 .DS_Store
