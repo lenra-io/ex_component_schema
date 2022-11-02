@@ -50,9 +50,6 @@
                 },
                 {
                     "$ref": "#/definitions/listenerType"
-                },
-                {
-                    "$ref": "#/definitions/requiredListenerProps"
                 }
             ]
         }
