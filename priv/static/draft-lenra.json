@@ -52,7 +52,14 @@
                     "$ref": "#/definitions/listenerType"
                 },
                 {
-                    "$ref": "#/definitions/requiredListenerProps"
+                    "oneOf": [
+                        {
+                            "$ref": "#/definitions/requiredListenerProps"
+                        },
+                        {
+                            "$ref": "#/definitions/requiredNavProps"
+                        }
+                    ]
                 }
             ]
         }
@@ -416,6 +423,50 @@
                         {
                             "enum": [
                                 "action"
+                            ]
+                        }
+                    ],
+                    "additionalItems": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": [
+                "properties",
+                "required"
+            ]
+        },
+        "requiredNavProps": {
+            "type": "object",
+            "properties": {
+                "properties": {
+                    "type": "object",
+                    "properties": {
+                        "navTo": {
+                            "type": "object",
+                            "properties": {
+                                "type": {
+                                    "enum": [
+                                        "string"
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "type"
+                            ]
+                        }
+                    },
+                    "additionalProperties": true,
+                    "required": [
+                        "navTo"
+                    ]
+                },
+                "required": {
+                    "type": "array",
+                    "items": [
+                        {
+                            "enum": [
+                                "navTo"
                             ]
                         }
                     ],
