@@ -73,7 +73,7 @@ defmodule ExComponentSchema.Schema do
   @spec get_fragment(Root.t(), ref_path | ExComponentSchema.json_path()) ::
           {:ok, resolved} | invalid_reference_error | no_return
   def get_fragment(root = %Root{}, path) when is_binary(path) do
-    case resolve_ref(root, path) do
+    case resolve_ref(root, path, root.location) do
       {:ok, {_root, ref}} -> get_fragment(root, ref)
       error -> error
     end
@@ -194,21 +194,23 @@ defmodule ExComponentSchema.Schema do
   end
 
   defp do_resolve(root, schema, scope) do
+    IO.inspect({:do_resolve, root})
+
     {root, schema} =
       Enum.reduce(schema, {root, %{}}, fn property, {root, schema} ->
-        {root, {k, v}} = resolve_property(root, property, scope)
+        {root, {k, v}} = resolve_property(root, root.location, property, scope)
         {root, Map.put(schema, k, v)}
       end)
 
     {root, schema |> sanitize_attributes()}
   end
 
-  defp resolve_property(root, {key, value}, scope) when is_map(value) do
+  defp resolve_property(root, _root_location, {key, value}, scope) when is_map(value) do
     {root, resolved} = resolve_with_root(root, value, scope)
     {root, {key, resolved}}
   end
 
-  defp resolve_property(root, {key, values}, scope) when is_list(values) do
+  defp resolve_property(root, _root_location, {key, values}, scope) when is_list(values) do
     {root, values} =
       Enum.reduce(values, {root, []}, fn value, {root, values} ->
         {root, resolved} = resolve_with_root(root, value, scope)
@@ -218,9 +220,11 @@ defmodule ExComponentSchema.Schema do
     {root, {key, Enum.reverse(values)}}
   end
 
-  defp resolve_property(root, {"$ref", ref}, scope) do
+  defp resolve_property(root, root_location, {"$ref", ref}, scope) do
+    IO.inspect({:resolve_property, ref, scope})
+
     scoped_ref =
-      case URI.parse(ref) do
+      case URI.parse(ref) |> IO.inspect() do
         %URI{host: nil, path: nil} = uri ->
           to_string(uri)
 
@@ -231,20 +235,24 @@ defmodule ExComponentSchema.Schema do
           end
       end
 
-    {root, path} = resolve_ref!(root, scoped_ref)
+    IO.inspect({:resolve_property, scoped_ref})
+
+    {root, path} = resolve_ref!(root, scoped_ref, root_location)
     {root, {"$ref", path}}
   end
 
-  defp resolve_property(root, tuple, _) when is_tuple(tuple), do: {root, tuple}
+  defp resolve_property(root, root_location, tuple, _) when is_tuple(tuple), do: {root, tuple}
 
-  defp resolve_ref(root, "#") do
+  defp resolve_ref(root, "#", _root_location) do
     {:ok, {root, [root.location]}}
   end
 
-  defp resolve_ref(root, ref) do
+  defp resolve_ref(root, ref, root_location) do
+    IO.inspect({:resolve_ref, ref})
     [url | anchor] = String.split(ref, "#")
     ref_path = validate_ref_path(anchor, ref)
-    {root, path} = root_and_path_for_url(root, ref_path, url)
+    IO.inspect({:resolve_ref, ref_path, url})
+    {root, path} = root_and_path_for_url(root, root_location, ref_path, url)
 
     case get_fragment(root, path) do
       {:ok, _schema} -> {:ok, {root, path}}
@@ -252,8 +260,8 @@ defmodule ExComponentSchema.Schema do
     end
   end
 
-  defp resolve_ref!(root, ref) do
-    case resolve_ref(root, ref) do
+  defp resolve_ref!(root, ref, root_location) do
+    case resolve_ref(root, ref, root_location) do
       {:ok, result} -> result
       {:error, :invalid_reference} -> raise_invalid_reference_error(ref)
     end
@@ -264,12 +272,14 @@ defmodule ExComponentSchema.Schema do
   defp validate_ref_path([fragment = "/" <> _], _), do: fragment
   defp validate_ref_path(_, ref), do: raise_invalid_reference_error(ref)
 
-  defp root_and_path_for_url(root, fragment, "") do
+  defp root_and_path_for_url(root, _root_location, fragment, "") do
     {root, [root.location | relative_path(fragment)]}
   end
 
-  defp root_and_path_for_url(root, fragment, url) do
-    root = resolve_and_cache_remote_schema(root, url)
+  defp root_and_path_for_url(root, root_location, fragment, url) do
+    IO.inspect({:root_and_path_for_url, fragment, url})
+
+    root = resolve_and_cache_remote_schema(root, root_location, url)
     {root, [url | relative_path(fragment)]}
   end
 
@@ -290,22 +300,28 @@ defmodule ExComponentSchema.Schema do
     end)
   end
 
-  defp resolve_and_cache_remote_schema(root, url) do
+  defp resolve_and_cache_remote_schema(root, root_location, url) do
+    IO.inspect({:resolve_and_cache_remote_schema, root.refs[url], url})
+
     if root.refs[url] do
       root
     else
-      remote_schema = remote_schema(url)
+      IO.inspect({:resolve_and_cache_remote_schema, "pass"})
+
+      remote_schema = remote_schema(url, root_location)
       resolve_remote_schema(root, url, remote_schema)
     end
   end
 
-  @spec remote_schema(String.t()) :: ExComponentSchema.object()
-  defp remote_schema(@current_draft_schema_url <> _), do: Draft7.schema()
-  defp remote_schema(@draft4_schema_url <> _), do: Draft4.schema()
-  defp remote_schema(@draft6_schema_url <> _), do: Draft6.schema()
-  defp remote_schema(@draft7_schema_url <> _), do: Draft7.schema()
-  defp remote_schema(@draft_lenra_schema_url <> _), do: DraftLenra.schema()
-  defp remote_schema(url) when is_bitstring(url), do: fetch_remote_schema(url)
+  @spec remote_schema(String.t(), String.t()) :: ExComponentSchema.object()
+  defp remote_schema(@current_draft_schema_url <> _, root_location), do: Draft7.schema()
+  defp remote_schema(@draft4_schema_url <> _, _root_location), do: Draft4.schema()
+  defp remote_schema(@draft6_schema_url <> _, _root_location), do: Draft6.schema()
+  defp remote_schema(@draft7_schema_url <> _, _root_location), do: Draft7.schema()
+  defp remote_schema(@draft_lenra_schema_url <> _, _root_location), do: DraftLenra.schema()
+
+  defp remote_schema(url, root_location) when is_bitstring(url),
+    do: fetch_remote_schema(url, root_location)
 
   defp resolve_remote_schema(root, url, remote_schema) do
     root = root_with_ref(root, url, remote_schema)
@@ -318,10 +334,12 @@ defmodule ExComponentSchema.Schema do
     %{root | refs: Map.put(root.refs, url, ref)}
   end
 
-  defp fetch_remote_schema(url) do
+  defp fetch_remote_schema(url, root_location) do
+    IO.inspect({:fetch_remote_schema, url})
+
     case remote_schema_resolver() do
-      fun when is_function(fun) -> fun.(url)
-      {mod, fun_name} -> apply(mod, fun_name, [url])
+      fun when is_function(fun) -> fun.(url, root_location)
+      {mod, fun_name} -> apply(mod, fun_name, [url, root_location])
     end
   end
 
