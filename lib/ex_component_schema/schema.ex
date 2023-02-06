@@ -194,11 +194,9 @@ defmodule ExComponentSchema.Schema do
   end
 
   defp do_resolve(root, schema, scope) do
-    IO.inspect({:do_resolve, root})
-
     {root, schema} =
       Enum.reduce(schema, {root, %{}}, fn property, {root, schema} ->
-        {root, {k, v}} = resolve_property(root, root.location, property, scope)
+        {root, {k, v}} = resolve_property(root, root.schema["$id"], property, scope)
         {root, Map.put(schema, k, v)}
       end)
 
@@ -221,10 +219,8 @@ defmodule ExComponentSchema.Schema do
   end
 
   defp resolve_property(root, root_location, {"$ref", ref}, scope) do
-    IO.inspect({:resolve_property, ref, scope})
-
     scoped_ref =
-      case URI.parse(ref) |> IO.inspect() do
+      case URI.parse(ref) do
         %URI{host: nil, path: nil} = uri ->
           to_string(uri)
 
@@ -234,8 +230,6 @@ defmodule ExComponentSchema.Schema do
             scope_uri -> URI.merge(scope_uri, ref_uri) |> to_string()
           end
       end
-
-    IO.inspect({:resolve_property, scoped_ref})
 
     {root, path} = resolve_ref!(root, scoped_ref, root_location)
     {root, {"$ref", path}}
@@ -248,10 +242,8 @@ defmodule ExComponentSchema.Schema do
   end
 
   defp resolve_ref(root, ref, root_location) do
-    IO.inspect({:resolve_ref, ref})
     [url | anchor] = String.split(ref, "#")
     ref_path = validate_ref_path(anchor, ref)
-    IO.inspect({:resolve_ref, ref_path, url})
     {root, path} = root_and_path_for_url(root, root_location, ref_path, url)
 
     case get_fragment(root, path) do
@@ -277,8 +269,6 @@ defmodule ExComponentSchema.Schema do
   end
 
   defp root_and_path_for_url(root, root_location, fragment, url) do
-    IO.inspect({:root_and_path_for_url, fragment, url})
-
     root = resolve_and_cache_remote_schema(root, root_location, url)
     {root, [url | relative_path(fragment)]}
   end
@@ -301,13 +291,9 @@ defmodule ExComponentSchema.Schema do
   end
 
   defp resolve_and_cache_remote_schema(root, root_location, url) do
-    IO.inspect({:resolve_and_cache_remote_schema, root.refs[url], url})
-
     if root.refs[url] do
       root
     else
-      IO.inspect({:resolve_and_cache_remote_schema, "pass"})
-
       remote_schema = remote_schema(url, root_location)
       resolve_remote_schema(root, url, remote_schema)
     end
@@ -335,8 +321,6 @@ defmodule ExComponentSchema.Schema do
   end
 
   defp fetch_remote_schema(url, root_location) do
-    IO.inspect({:fetch_remote_schema, url})
-
     case remote_schema_resolver() do
       fun when is_function(fun) -> fun.(url, root_location)
       {mod, fun_name} -> apply(mod, fun_name, [url, root_location])
