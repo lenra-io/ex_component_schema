@@ -73,7 +73,7 @@ defmodule ExComponentSchema.Schema do
   @spec get_fragment(Root.t(), ref_path | ExComponentSchema.json_path()) ::
           {:ok, resolved} | invalid_reference_error | no_return
   def get_fragment(root = %Root{}, path) when is_binary(path) do
-    case resolve_ref(root, path, root.location) do
+    case resolve_ref(root, path, root.schema["$id"]) do
       {:ok, {_root, ref}} -> get_fragment(root, ref)
       error -> error
     end
