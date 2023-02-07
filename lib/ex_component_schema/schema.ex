@@ -235,7 +235,7 @@ defmodule ExComponentSchema.Schema do
     {root, {"$ref", path}}
   end
 
-  defp resolve_property(root, root_location, tuple, _) when is_tuple(tuple), do: {root, tuple}
+  defp resolve_property(root, _root_location, tuple, _) when is_tuple(tuple), do: {root, tuple}
 
   defp resolve_ref(root, "#", _root_location) do
     {:ok, {root, [root.location]}}
@@ -300,7 +300,7 @@ defmodule ExComponentSchema.Schema do
   end
 
   @spec remote_schema(String.t(), String.t()) :: ExComponentSchema.object()
-  defp remote_schema(@current_draft_schema_url <> _, root_location), do: Draft7.schema()
+  defp remote_schema(@current_draft_schema_url <> _, _root_location), do: Draft7.schema()
   defp remote_schema(@draft4_schema_url <> _, _root_location), do: Draft4.schema()
   defp remote_schema(@draft6_schema_url <> _, _root_location), do: Draft6.schema()
   defp remote_schema(@draft7_schema_url <> _, _root_location), do: Draft7.schema()
@@ -329,7 +329,7 @@ defmodule ExComponentSchema.Schema do
 
   defp remote_schema_resolver do
     Application.get_env(:ex_component_schema, :remote_schema_resolver) ||
-      fn _url -> raise UndefinedRemoteSchemaResolverError end
+      fn _url, _root_location -> raise UndefinedRemoteSchemaResolverError end
   end
 
   defp sanitize_attributes(schema) do
