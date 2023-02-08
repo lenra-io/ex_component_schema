@@ -5,7 +5,7 @@ defmodule ExComponentSchema.ConfigTest do
 
   @schema %{"$ref" => "http://somewhere/schema.json"}
 
-  def test_resolver(url), do: %{"foo" => url}
+  def test_resolver(url, _root_location), do: %{"foo" => url}
 
   setup do
     resolver = Application.get_env(:ex_component_schema, :remote_schema_resolver)

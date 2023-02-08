@@ -6,7 +6,7 @@ end
 
 config :ex_component_schema,
   decode_json: fn json -> Poison.decode(json) end,
-  remote_schema_resolver: fn url ->
+  remote_schema_resolver: fn url, _root_location ->
     case SimpleHttp.get(url) do
       {:ok, res} -> res.body
       _ -> File.read!(Path.join("test/API-Component-Test-Suite/remotes/", url))
