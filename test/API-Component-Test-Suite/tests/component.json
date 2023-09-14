@@ -28,7 +28,12 @@
                 "listener": {
                     "type": "listener",
                     "properties": {
-                        "action": {
+                        "_type": {
+                            "enum": [
+                                "listener"
+                            ]
+                        },
+                        "name": {
                             "type": "string"
                         },
                         "props": {
@@ -36,7 +41,8 @@
                         }
                     },
                     "required": [
-                        "action"
+                        "_type",
+                        "name"
                     ]
                 }
             }
@@ -47,7 +53,8 @@
                 "data": {
                     "_type": "machin",
                     "onPressed": {
-                        "action": "myAction",
+                        "_type": "listener",
+                        "name": "myAction",
                         "props": {
                             "my": "data"
                         }
@@ -60,7 +67,8 @@
                 "data": {
                     "_type": "machin",
                     "onPressed": {
-                        "action": "myAction",
+                         "_type": "listener",
+                        "name": "myAction",
                         "props": {
                             "my": "data"
                         },
@@ -74,7 +82,8 @@
                 "data": {
                     "_type": "machin",
                     "onPressed": {
-                        "action": "myAction",
+                         "_type": "listener",
+                        "name": "myAction",
                         "props": {
                             "my": "data"
                         }
@@ -88,7 +97,8 @@
                 "data": {
                     "_type": "foo",
                     "onPressed": {
-                        "action": "myAction",
+                         "_type": "listener",
+                        "name": "myAction",
                         "props": {
                             "my": "data"
                         }

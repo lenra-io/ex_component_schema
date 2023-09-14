@@ -374,7 +374,23 @@
                 "properties": {
                     "type": "object",
                     "properties": {
-                        "action": {
+                        "_type": {
+                            "type": "object",
+                            "properties": {
+                                "enum": {
+                                    "type": "array",
+                                    "items": [
+                                        {
+                                            "type": "string"
+                                        }
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "enum"
+                            ]
+                        },
+                        "name": {
                             "type": "object",
                             "properties": {
                                 "type": {
@@ -403,7 +419,8 @@
                     },
                     "additionalProperties": true,
                     "required": [
-                        "action",
+                        "_type",
+                        "name",
                         "props"
                     ]
                 },
@@ -412,7 +429,7 @@
                     "items": [
                         {
                             "enum": [
-                                "action"
+                                "name"
                             ]
                         }
                     ],
