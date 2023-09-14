@@ -4,7 +4,7 @@
         "schema": {
             "type": "component",
             "properties": {
-                "type": {
+                "_type": {
                     "enum": [
                         "machin"
                     ]
@@ -20,7 +20,7 @@
                 }
             },
             "required": [
-                "type",
+                "_type",
                 "onPressed"
             ],
             "additionalProperties": false,
@@ -45,7 +45,7 @@
             {
                 "description": "valid",
                 "data": {
-                    "type": "machin",
+                    "_type": "machin",
                     "onPressed": {
                         "action": "myAction",
                         "props": {
@@ -58,7 +58,7 @@
             {
                 "description": "valid, additional properties on listener allowed",
                 "data": {
-                    "type": "machin",
+                    "_type": "machin",
                     "onPressed": {
                         "action": "myAction",
                         "props": {
@@ -72,7 +72,7 @@
             {
                 "description": "invalid, additional properties on component not allowed",
                 "data": {
-                    "type": "machin",
+                    "_type": "machin",
                     "onPressed": {
                         "action": "myAction",
                         "props": {
@@ -86,7 +86,7 @@
             {
                 "description": "invalid, bad component name",
                 "data": {
-                    "type": "foo",
+                    "_type": "foo",
                     "onPressed": {
                         "action": "myAction",
                         "props": {
@@ -99,7 +99,7 @@
             {
                 "description": "invalid, action is required in listener",
                 "data": {
-                    "type": "machin",
+                    "_type": "machin",
                     "onPressed": {
                         "props": {
                             "my": "data"
@@ -111,7 +111,7 @@
             {
                 "description": "invalid, onPressed must be defined",
                 "data": {
-                    "type": "machin"
+                    "_type": "machin"
                 },
                 "valid": false
             }

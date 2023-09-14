@@ -309,7 +309,7 @@
                 "properties": {
                     "type": "object",
                     "properties": {
-                        "type": {
+                        "_type": {
                             "type": "object",
                             "properties": {
                                 "enum": {
@@ -327,7 +327,7 @@
                         }
                     },
                     "required": [
-                        "type"
+                        "_type"
                     ]
                 },
                 "additionalProperties": {
@@ -340,7 +340,7 @@
                     "items": [
                         {
                             "enum": [
-                                "type"
+                                "_type"
                             ]
                         }
                     ],
