@@ -40,7 +40,7 @@
                     "text": "truc",
                     "children": [
                         {
-                            "type": "truc"
+                            "_type": "truc"
                         }
                     ]
                 },
@@ -53,7 +53,7 @@
                     "text": "truc",
                     "children": [
                         {
-                            "type": "machin"
+                            "_type": "machin"
                         }
                     ]
                 },
