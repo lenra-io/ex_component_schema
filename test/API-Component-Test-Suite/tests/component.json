@@ -4,7 +4,7 @@
         "schema": {
             "type": "component",
             "properties": {
-                "type": {
+                "_type": {
                     "enum": [
                         "machin"
                     ]
@@ -20,7 +20,7 @@
                 }
             },
             "required": [
-                "type",
+                "_type",
                 "onPressed"
             ],
             "additionalProperties": false,
@@ -28,7 +28,12 @@
                 "listener": {
                     "type": "listener",
                     "properties": {
-                        "action": {
+                        "_type": {
+                            "enum": [
+                                "listener"
+                            ]
+                        },
+                        "name": {
                             "type": "string"
                         },
                         "props": {
@@ -36,7 +41,8 @@
                         }
                     },
                     "required": [
-                        "action"
+                        "_type",
+                        "name"
                     ]
                 }
             }
@@ -45,9 +51,10 @@
             {
                 "description": "valid",
                 "data": {
-                    "type": "machin",
+                    "_type": "machin",
                     "onPressed": {
-                        "action": "myAction",
+                        "_type": "listener",
+                        "name": "myAction",
                         "props": {
                             "my": "data"
                         }
@@ -58,9 +65,10 @@
             {
                 "description": "valid, additional properties on listener allowed",
                 "data": {
-                    "type": "machin",
+                    "_type": "machin",
                     "onPressed": {
-                        "action": "myAction",
+                         "_type": "listener",
+                        "name": "myAction",
                         "props": {
                             "my": "data"
                         },
@@ -72,9 +80,10 @@
             {
                 "description": "invalid, additional properties on component not allowed",
                 "data": {
-                    "type": "machin",
+                    "_type": "machin",
                     "onPressed": {
-                        "action": "myAction",
+                         "_type": "listener",
+                        "name": "myAction",
                         "props": {
                             "my": "data"
                         }
@@ -86,9 +95,10 @@
             {
                 "description": "invalid, bad component name",
                 "data": {
-                    "type": "foo",
+                    "_type": "foo",
                     "onPressed": {
-                        "action": "myAction",
+                         "_type": "listener",
+                        "name": "myAction",
                         "props": {
                             "my": "data"
                         }
@@ -99,7 +109,7 @@
             {
                 "description": "invalid, action is required in listener",
                 "data": {
-                    "type": "machin",
+                    "_type": "machin",
                     "onPressed": {
                         "props": {
                             "my": "data"
@@ -111,7 +121,7 @@
             {
                 "description": "invalid, onPressed must be defined",
                 "data": {
-                    "type": "machin"
+                    "_type": "machin"
                 },
                 "valid": false
             }

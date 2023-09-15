@@ -4,7 +4,7 @@
         "schema": {
             "type": "component",
             "properties": {
-                "type": {
+                "_type": {
                     "enum": [
                         "machin"
                     ]
@@ -17,7 +17,7 @@
                     "items": {
                         "type": "component",
                         "properties": {
-                            "type": {
+                            "_type": {
                                 "enum": [
                                     "truc"
                                 ]
@@ -27,7 +27,7 @@
                 }
             },
             "required": [
-                "type",
+                "_type",
                 "text"
             ],
             "additionalProperties": false
@@ -36,11 +36,11 @@
             {
                 "description": "valid, type for a children",
                 "data": {
-                    "type": "machin",
+                    "_type": "machin",
                     "text": "truc",
                     "children": [
                         {
-                            "type": "truc"
+                            "_type": "truc"
                         }
                     ]
                 },
@@ -49,11 +49,11 @@
             {
                 "description": "invalid, type for a children",
                 "data": {
-                    "type": "machin",
+                    "_type": "machin",
                     "text": "truc",
                     "children": [
                         {
-                            "type": "machin"
+                            "_type": "machin"
                         }
                     ]
                 },

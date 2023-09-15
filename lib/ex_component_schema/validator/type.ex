@@ -48,7 +48,7 @@ defmodule ExComponentSchema.Validator.Type do
     is_float(data) and Float.round(data) == data
   end
 
-  defp valid?(_, "component", %{"type" => _}), do: true
+  defp valid?(_, "component", %{"_type" => _}), do: true
   defp valid?(_, "component", _), do: false
   defp valid?(_, "listener", data), do: is_map(data)
 
